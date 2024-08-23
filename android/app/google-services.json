@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "900525516829",
+    "project_id": "ajeeb-flutter",
+    "storage_bucket": "ajeeb-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:900525516829:android:ae69a2b62fefe6d492bef4",
+        "android_client_info": {
+          "package_name": "com.buddy.ajeebdastan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOp-f-0HFvlygEk3cQuZy9Emabja_hyTg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
