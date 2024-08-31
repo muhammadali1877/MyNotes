@@ -2,18 +2,13 @@ import 'package:ajeebdastan/Views/LoginView.dart';
 import 'package:ajeebdastan/Views/NotesView.dart';
 import 'package:ajeebdastan/Views/RegisterView.dart';
 import 'package:ajeebdastan/Views/Verify_Email_View.dart';
-import 'package:ajeebdastan/firebase_options.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ajeebdastan/constants/routes.dart';
-
+import 'package:ajeebdastan/services/auth/auth_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await AuthService.firebase().initialize();
   runApp(
     MaterialApp(
       title: 'Flutter Demo',
@@ -21,17 +16,16 @@ void main() async {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomePage(),  // Use HomePage for Firebase initialization
+      home: const HomePage(), // Use HomePage for Firebase initialization
       routes: {
-        loginRoute : (context) => const LoginView(),
-        registerRoute : (context) => const RegisterView(),
+        loginRoute: (context) => const LoginView(),
+        registerRoute: (context) => const RegisterView(),
         notesRoute: (context) => const NotesView(),
-        verifyEmailRoute:(context)=> const VerifyEmailView(),
+        verifyEmailRoute: (context) => const VerifyEmailView(),
       },
     ),
   );
 }
-
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -39,14 +33,13 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform),
+      future: AuthService.firebase().initialize(),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.done:
-            final user = FirebaseAuth.instance.currentUser;
+            final user = AuthService.firebase().currentUser;
             if (user != null) {
-              if (user.emailVerified) {
+              if (user.isEmailVerified) {
                 print("Email is verified");
               } else {
                 return const VerifyEmailView();
